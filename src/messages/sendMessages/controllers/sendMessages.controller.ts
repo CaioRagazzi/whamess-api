@@ -1,4 +1,4 @@
-import { Controller, Post, Body, ValidationPipe, UseGuards, Query, Param } from '@nestjs/common';
+import { Controller, Post, Body, ValidationPipe, UseGuards } from '@nestjs/common';
 import { SendMessagesDTO } from '../DTOs/sendMessagesDTO';
 import { SendMessagesService } from '../services/sendMessages.service';
 import { JwtAuthGuard } from 'src/auth/passport/guards/jwt-auth.guard';
@@ -10,7 +10,7 @@ export class SendMessagesController {
 
   @UseGuards(JwtAuthGuard)
   @Post('messages/send')
-  async sendMessages(@Query() param, @Body(ValidationPipe) sendMessagesDto: SendMessagesDTO): Promise<any> {
+  async sendMessages(@Body(ValidationPipe) sendMessagesDto: SendMessagesDTO): Promise<any> {
     const columns = sendMessagesDto.columnSheet.shift();
 
     for (let index = 0; index < sendMessagesDto.columnSheet.length; index++) {
@@ -22,7 +22,7 @@ export class SendMessagesController {
         }
       })
 
-      await this.sendMessagesService.execute(param, sendMessagesDto.columnSheet[index][0], formatedMessage)
+      await this.sendMessagesService.execute(sendMessagesDto.columnSheet[index][0], formatedMessage)
     }
 
     this.sendMessagesService.removeSession();

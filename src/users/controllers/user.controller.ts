@@ -46,25 +46,25 @@ export default class UserController {
         return await this.userServices.messagescount(param.id, param.rows);
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Post('users/messagesinfo/')
     async messagesinfo(@Body() data: MessagesInfoDTO) {
         return await this.userServices.messagesInfo(data);
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get('users/messagesperday/')
     async messagesPerDay(@Query() param) {
     return await this.userServices.messagesPerDay(param.id);
     }    
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get('users/messagesperweek/')
     async messagesPerWeek(@Query() param) {
     return await this.userServices.messagesPerWeek(param.id);
     }    
     
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get('users/messagespermonth/')
     async messagesPerMonth(@Query() param) {
     return await this.userServices.messagesPerMonth(param.id);

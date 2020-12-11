@@ -51,20 +51,3 @@ export class MessagesInfo {
   mes_date: Date;
 
 }
-
-@Entity()
-export class ClientPorts {
-  
-  @PrimaryGeneratedColumn()
-  cp_id: number;
-
-  @Column()
-  usr_id: number;
-
-  @Column({ default: '0' })
-  cp_portnav: string;
-
-  @Column({default: '0'})
-  cp_portnode: string;
-
-}

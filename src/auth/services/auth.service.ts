@@ -18,9 +18,8 @@ export class AuthService {
 
   async login(user: any) {
     const { id } = await this.usersService.getByEmail(user.email);
-    const tes = await this.usersService.getClientPorts(id);
-      
-    const payload = { email: user.email, id, _v: tes[0].cp_portnav, _n: tes[0].cp_portnode };
+    
+    const payload = { email: user.email, id };
     
     return {
       access_token: this.jwtService.sign(payload),

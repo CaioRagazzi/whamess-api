@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Delete, Query } from '@nestjs/common';
+import { Controller, Get, UseGuards, Delete } from '@nestjs/common';
 import { SessionService } from "../services/session.service";
 import { JwtAuthGuard } from 'src/auth/passport/guards/jwt-auth.guard';
 
@@ -8,9 +8,9 @@ export class SessionController {
     constructor(private SessionService: SessionService) { }
     @UseGuards(JwtAuthGuard)
     @Get()
-    async findAll(@Query() param) {
-        let islogged = await this.SessionService.getSession(param);
-        //this.SessionService.removeSession();
+    async findAll() {
+        let islogged = await this.SessionService.getSession();
+        this.SessionService.removeSession();
         return { islogged };
     }
 

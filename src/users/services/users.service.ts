@@ -1,6 +1,6 @@
 import { Injectable, HttpStatus, BadRequestException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users, MessagesInfo, ClientPorts } from '../entities/users.entity';
+import { Users, MessagesInfo } from '../entities/users.entity';
 import { Repository, getConnection } from 'typeorm';
 import { UsersDTO, UpdateUsersDTO, MessagesInfoDTO } from '../DTOs/users.dto';
 
@@ -124,10 +124,4 @@ export class UsersService {
     .where("usr_id = :usr_id and month(mes_date) = MONTH(NOW())", { usr_id: id })
     .getMany();
   } 
-
-  async getClientPorts(id: number) {
-        return await getConnection().createQueryBuilder(ClientPorts, 'client_ports')
-        .where("usr_id = :usr_id", { usr_id: id })
-        .getMany();
-  }
 }
